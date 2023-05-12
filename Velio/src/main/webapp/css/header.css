@@ -1,0 +1,115 @@
+@charset "EUC-KR";
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none
+}
+
+/* Style the header element */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e1e1e;
+    padding: 20px;
+}
+
+/* Style the logo image */
+.logo img {
+    height: 50px;
+}
+
+/* Style the navigation links */
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Style the sign up and login buttons */
+.signup .button {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.signup .button:hover {
+    background-color: #555;
+}
+
+
+/* Style the dropdown button */
+.dropdown-btn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 150px; /* added width property */
+    padding: 15px 20px; /* increased padding for height */
+}
+
+.dropdown-btn:hover {
+    background-color: #555;
+}
+
+/* Style the dropdown menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #1e1e1e;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 30px;
+    border-radius: 5px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #d6d6d6;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f2f2f2;
+    color: #1e1e1e;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
