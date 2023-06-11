@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>velio</title>
 <link rel="stylesheet" href="../resources/css/mypage.css">
 
 </head>
@@ -61,11 +61,13 @@
 			    
 				<div class="post-header">
 				    <div class="post-author">
-				    	작성자 : <%= portfolio.getUser().getNickname() %>
+				    	작성자 : <%= portfolio.getUser().getNickname() %>, 이메일 : <%= portfolio.getUser().getEmail() %>
 				    </div>
 				   	<div class="post-edit">
+				    	<a href=portfolio_pdf.jsp?pf_id=<%=portfolio.getId() %> target="_blank">pdf저장</a>			   	
 				    	<a href=edit_portfolio.jsp?pf_id=<%=portfolio.getId() %>>수정</a>
-				    	<a href=edit_portfolio.jsp>삭제</a>
+				    	<a href=../service/portfolio/delete_portfolio_process.jsp?pf_id=<%=portfolio.getId() %>>삭제</a>
+				    	<a href=../service/user/delete_user_process.jsp?id=<%=portfolio.getUser().getId() %>>회원탈퇴</a>
 				    </div>
 				    
 				</div>
@@ -90,7 +92,7 @@
 			    
 			    <div class="post-certifications">
 			    	<div class="small-title">
-			    		자격증
+			    		스펙
 			    	</div>
 			    	<%
 			    		for(String spec : portfolio.getSpecArray()) {
@@ -104,9 +106,11 @@
 		</div>
 		
 		<div class="else">
-			잡코리아
+			<div class="calender-container">
+				<iframe id="pageFrame" name="pageFrame" src="http://www.jobkorea.co.kr/Starter/calendar/sub/month" frameborder="0"
+				width="95%" height="1000px" scrolling="auto"></iframe>
+			</div>
 		</div>
 	</div>
-	
 </body>
 </html>

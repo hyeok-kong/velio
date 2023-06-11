@@ -10,6 +10,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import bean.dto.*;
+import bean.dao.SharedDao;
 import bean.util.Hashing;
 
 public class PortfolioDao {
@@ -65,6 +66,77 @@ public class PortfolioDao {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) result = rs.getInt(1);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		
+		return result;
+	}
+	
+	
+	// 전체 포트폴리오 개수 반환
+	// 페이징 처리를 위함
+	public int getPortfolioCount(String keyword) {
+		int result = -1;
+		connect();
+		
+		String sql = "select count(id) from portfolio where locate(?, interests) > 0";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) result = rs.getInt(1);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		
+		return result;
+	}
+	
+	
+	
+	public ArrayList<PortfolioDto> getPortfolioList(int pageNum, int count, String keyword) {
+		ArrayList<PortfolioDto> result = new ArrayList<>();
+		connect();
+		
+		String sql = "select id, title, content, interests, views, shared, nickname "
+				+ "from portfolio_user "
+				+ "where locate(?, interests) > 0 "
+				+ "order by id desc "
+				+ "LIMIT ?, ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, pageNum);
+			pstmt.setInt(3, count);
+			
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				PortfolioDto dto = new PortfolioDto();
+				
+				UserDto user = new UserDto();
+				user.setNickname(rs.getString("nickname"));
+				
+				dto.setId(rs.getInt("id"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setInterests(rs.getString("interests"));
+				dto.setViews(rs.getInt("views"));
+				dto.setShared(rs.getInt("shared"));
+				
+				dto.setUser(user);
+				
+				result.add(dto);
+			}
+			rs.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -186,6 +258,7 @@ public class PortfolioDao {
 	}
 	
 	
+	// 유저 아이디로 포트폴리오 찾기
 	public PortfolioDto getPortfolioByUserId(int id) {
 		PortfolioDto dto = new PortfolioDto();
 		UserDto user = new UserDto();
@@ -338,6 +411,30 @@ public class PortfolioDao {
 			disconnect();
 		}
 		
+		return result;
+	}
+	
+
+	public boolean updateSharedCount(int id) {
+		SharedDao sharedDao = new SharedDao();
+		boolean result = false;
+		connect();
+		
+		String sql = "update portfolio set shared=? where id=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, sharedDao.getSharedCount(id));
+			pstmt.setInt(2, id);
+			
+			if(pstmt.executeUpdate() == 1) result = true;
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
 		return result;
 	}
 	

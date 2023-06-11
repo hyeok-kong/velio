@@ -8,10 +8,16 @@
 .else {
 	margin: 0 auto;
 	width: 50%;
-	height: 500px;
 	float: right;
-	font-size: 40px;
-	background-color: #333333;
+}
+
+.calender-container {
+    width: 90%;
+    margin: 8px auto 0;
+    background-color: #ffffff;
+    text-align: left;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .post-container {
@@ -35,7 +41,6 @@
     margin-bottom: 10px;
     text-align: left;
 }
-
 .post-meta {
     text-align: right;
 }
@@ -104,3 +109,4 @@
 .post-certifications span {
 	font-style: bold;
 }
+

@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+
+main {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+
+.card {
+	width: 60%;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 10px;
+	color: #e9e8e8;
+	background-color: #333333;
+}
+
+.card-header {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 5px;
+}
+
+.card-title {
+	font-weight: bold;
+	font-size: 30px;
+	margin-right: 10px;
+}
+
+.card-author {
+	font-size: 18px;
+}
+
+.card-like {
+	color: #e9e8e8;
+	font-weight: bold;
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	display: inline-block;
+	padding: 5px 10px;
+	margin-right: 5px;
+	background-color: #5e5e5e;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.card-like-count {
+	margin-right: 5px;
+	font-size: 16px;
+}
+
+.card-content {
+	margin-bottom: 10px;
+}
+
+.card-tags {
+	font-size: 14px;
+}
+
+.card-tags span {
+	display: inline-block;
+	padding: 5px 10px;
+	margin-top: 5px;
+	margin-right: 5px;
+	background-color: #5e5e5e;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.card-tags span a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.card-tags span:hover {
+	background-color: #ccc;
+}
+
+.card-tags span a:hover {
+	text-decoration: none;
+}
+
+.post-actions {
+	display: flex;
+	gap: 5px;
+	align-self: flex-start;
+	flex-shrink: 0;
+}
+
+.edit-button, .delete-button {
+	padding: 5px 10px;
+	background-color: #e0e0e0;
+	color: #404040;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s ease;
+}
+
+.edit-button:hover, .delete-button:hover {
+	background-color: #787878;
+}

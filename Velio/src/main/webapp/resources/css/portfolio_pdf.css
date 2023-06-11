@@ -3,8 +3,8 @@
 .post-container {
     width: 60%;
     margin: 8px auto 0;
-    background-color: #333333;
-    color: #e9e8e8;
+    background-color: #ffffff;
+    color: #111111;
     text-align: left;
     padding: 20px;
     border-radius: 10px;
@@ -28,22 +28,13 @@
 
 .post-author {
     margin-bottom: 10px;
-    color: #bfbfbf;
+    color: #111111;
     text-align: left;
-}
-
-.post-edit {
-	text-align: right;
-}
-
-.post-edit a {
-	text-decoration: none;
-	color: #e9e8e8;
 }
 
 .post-divider {
     border: none;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #222;
     margin: 20px 0;
 }
 
@@ -53,7 +44,7 @@
 .post-project {
     margin-bottom: 10px;
     padding: 10px;
-    color: #e9e8e8;
+    color: #111111;
 }
 
 
@@ -70,21 +61,13 @@
 	display: inline-block;
 	padding: 5px 10px;
 	margin-right: 5px;
-	background-color: #5e5e5e;
+	background-color: #bbbbbb;
 	border-radius: 5px;
 	transition: background-color 0.3s ease;
 }
 
 .post-interests span a {
-	color: #fff;
-	text-decoration: none;
-}
-
-.post-interests span:hover {
-	background-color: #ccc;
-}
-
-.post-interests span a:hover {
+	color: #111111;
 	text-decoration: none;
 }
 
@@ -95,7 +78,7 @@
 .container_project {
 	width: 100%;
 	margin: 0 auto;
-	color: #e9e8e8;
+	color: #111111;
 	border-radius: 10px;
 }
 
@@ -118,7 +101,7 @@
 	justify-content: space-between;
 	margin-bottom: 10px;
 	padding: 10px;
-	background-color: #333333;
+	background-color: #eeeeee;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
@@ -127,7 +110,7 @@
 	width: 200px;
 	height: 200px;
 	margin-right: 10px;
-	background-color: #404040;
+	background-color: #ffffff;
 	flex-shrink: 0;
 }
 

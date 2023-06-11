@@ -25,7 +25,10 @@
 		<%
 		request.setCharacterEncoding("utf-8");
 		
+		
+		
 		String pageParam = request.getParameter("page");
+		String keyword = request.getParameter("keyword");
 		
 		// 요청 페이지
 		int pageNum;
@@ -34,7 +37,15 @@
 		// 페이징 블록 단위
 		int blockCount = 5;
 		// 총 포트폴리오 개수
-		int totalCount = portfolioDao.getPortfolioCount();
+		int totalCount = 0;
+		// 출력할 포트폴리오 리스트
+		ArrayList<PortfolioDto> portfolios = new ArrayList<>();
+		
+		if(keyword == null) {
+			totalCount = portfolioDao.getPortfolioCount();
+		} else {
+			totalCount = portfolioDao.getPortfolioCount(keyword);
+		}
 		
 		if(pageParam == null || pageParam.length() == 0) {
 			pageNum = 1;
@@ -60,8 +71,10 @@
 			endPage = totalPages;
 		}
 		
-		
-		ArrayList<PortfolioDto> portfolios = portfolioDao.getPortfolioList((pageNum - 1) * count, count);
+		if(keyword == null) 
+			portfolios = portfolioDao.getPortfolioList((pageNum - 1) * count, count);
+		else 
+			portfolios = portfolioDao.getPortfolioList((pageNum - 1) * count, count, keyword);
 		
 		if(portfolios.size() > 0) {
 		%>
@@ -86,7 +99,7 @@
 			<%
 					for(String interest : portfolio.getInterArray()) {
 			%>
-					<span><a href="#"><%= interest %></a></span>
+					<span><a href="main.jsp?keyword=<%= interest%>"><%= interest %></a></span>
 			<%
 					}
 			%>

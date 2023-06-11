@@ -119,6 +119,7 @@ public class UserDao {
 			user.setName(rs.getString("name"));
 			user.setNickname(rs.getString("nickname"));
 			user.setEmail(rs.getString("email"));
+			user.setRole(rs.getString("role"));
 			rs.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -146,6 +147,7 @@ public class UserDao {
 				user.setName(rs.getString("name"));
 				user.setNickname(rs.getString("nickname"));
 				user.setEmail(rs.getString("email"));
+				user.setRole(rs.getString("role"));
 				rs.close();
 			}
 		} catch(SQLException e) {
@@ -185,20 +187,44 @@ public class UserDao {
 	
 	
 	// 쿠키에 저장되어있는 아이디를 받아 유저 삭제
-	public boolean deleteUser(String uid) {
+	public boolean deleteUser(int id) {
 		boolean result = false;
 		connect();
 		String sql = "delete from user where id=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, uid);
+			pstmt.setInt(1, id);
 			pstmt.executeUpdate();
 			
 			result = true;
 		} catch(SQLException e) {
 			e.printStackTrace();
 			return result;
+		} finally {
+			disconnect();
+		}
+		
+		return result;
+	}
+	
+	
+	public boolean isRightRequest(int id, String uid) {
+		boolean result = false;
+		connect();
+		
+		String sql = "select id from user where uid=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getInt("id") == id) result = true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		} finally {
 			disconnect();
 		}

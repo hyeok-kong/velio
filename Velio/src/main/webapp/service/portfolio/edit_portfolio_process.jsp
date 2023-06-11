@@ -36,7 +36,7 @@
 
 		
 		response.sendRedirect("../../view/mypage.jsp?id=" + userId);
-	} else {		
+	} else {
 		int userId = Integer.parseInt(request.getParameter("userid"));
 		user.setId(userId);
 		user.setName(request.getParameter("name"));

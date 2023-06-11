@@ -29,12 +29,15 @@
 		
 		Cookie idCookie = new Cookie("VelioID", uid);
 		Cookie nameCookie = new Cookie("VelioNickname", user.getNickname());
+		Cookie roleCookie = new Cookie("VelioRole", user.getRole());
 		
 		idCookie.setPath("/");
 		nameCookie.setPath("/");
+		roleCookie.setPath("/");
 		
 		response.addCookie(idCookie);
 		response.addCookie(nameCookie);
+		response.addCookie(roleCookie);
 		
 		response.sendRedirect("../../view/main.jsp");
 	}

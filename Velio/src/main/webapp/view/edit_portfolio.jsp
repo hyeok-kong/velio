@@ -23,6 +23,8 @@
 	int userId = 0;
 	int pfId = 0;
 	
+	String uid = "";
+	String ruid = "";
 	
 	String name = "";
 	String nickname = "";
@@ -50,6 +52,7 @@
 		
 		PortfolioDto portfolio = portfolioDao.getPortfolio(pfId);
 		
+		ruid = portfolio.getUser().getUid();
 		name = portfolio.getUser().getName();
 		nickname = portfolio.getUser().getNickname();
 		email = portfolio.getUser().getEmail();
@@ -62,7 +65,22 @@
 		userId = portfolio.getUser().getId();
 	}
 	
+	Cookie[] cookies = request.getCookies();
+	for(Cookie cookie : cookies) {
+		if(cookie.getName().equals("VelioID")) uid = cookie.getValue();
+	}
 	
+	if(reqPf != null) {
+		if(!uid.equals(ruid)) {
+		%>
+		<script>
+			alert("비정상적인 접근입니다.");
+			history.back();
+		</script>
+		<%
+		}
+
+	}
 	%>
 	
 	<form method="POST" action="../service/portfolio/edit_portfolio_process.jsp">

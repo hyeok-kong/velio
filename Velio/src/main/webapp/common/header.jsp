@@ -96,8 +96,8 @@
 				</button>
 				<div class="dropdown-menu">
 					<a href="../view/mypage.jsp?id=<%= userDao.findUserIdByUid(uid) %>">내 포트폴리오</a>
-					<a href="#">프로젝트 관리</a>
-					<a href="#">즐겨찾기</a>
+					<a href="../view/project_list.jsp?id=<%= userDao.findUserIdByUid(uid) %>">프로젝트 관리</a>
+					<a href="../view/shared_list.jsp?id=<%= userDao.findUserIdByUid(uid) %>">즐겨찾기</a>
 					<a href="../service/user/logout_process.jsp" onClick="location.reload()">로그아웃</a>
 				</div>
 			</div>

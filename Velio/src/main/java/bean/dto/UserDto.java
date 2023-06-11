@@ -9,6 +9,7 @@ public class UserDto {
 	private String name;
 	private String nickname;
 	private String email;
+	private String role;
 	private Timestamp created_date;
 	
 	
@@ -47,6 +48,12 @@ public class UserDto {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	public Timestamp getCreated_date() {
 		return created_date;

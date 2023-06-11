@@ -4,51 +4,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>velio</title>
-<link rel="stylesheet" href="../resources/css/portfolio.css">
+<title>portfolio</title>
+<link rel="stylesheet" href="../resources/css/portfolio_pdf.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
 
 </head>
+
 <body>
-	<jsp:include page="../common/header.jsp" />
-	
 	<%@ page import="bean.dto.*, java.util.*" %>
 	<jsp:useBean id="portfolioDao" class="bean.dao.PortfolioDao" scope="page" />
 	<jsp:useBean id="projectDao" class="bean.dao.ProjectDao" scope="page" />
 	<jsp:useBean id="userDao" class="bean.dao.UserDao" scope="page" />
-		
 	<%
 	request.setCharacterEncoding("utf-8");
 	
-	int id = Integer.parseInt(request.getParameter("id"));
+	int id = Integer.parseInt(request.getParameter("pf_id"));
 	PortfolioDto portfolio = portfolioDao.getPortfolio(id);
-	
-	Cookie[] cookies = request.getCookies();
-	String uid = "";
-	
-	boolean isAdmin = false;
-	
-	for (Cookie cookie : cookies) {
-		if (cookie.getName().equals("VelioID")) {
-			uid = cookie.getValue();
-		}
-		if(cookie.getName().equals("VelioRole")) {
-			if(cookie.getValue().equals("admin")) isAdmin = true;
-		}
-	}
-	
-	int loginUserId = userDao.findUserIdByUid(uid);
-	
-	portfolioDao.increaseViewCount(id);
-	%>
-	
+	 %>
 	<main>
 		<div class="post-container">
 		    <div class="post-header">
 		        <h1 class="post-title"><%= portfolio.getTitle() %></h1>
-		        <div class="post-meta">
-		            <span class="post-views">조회수 : <%= portfolio.getViews() %></span>
-		            <span class="post-shares">공유수 : <%= portfolio.getShared() %></span>
-		        </div>
 		    </div>
 		   
 		    
@@ -56,32 +33,6 @@
 			    <div class="post-author">
 			    	작성자 : <%= portfolio.getUser().getNickname() %>, 이메일 : <%= portfolio.getUser().getEmail() %>
 			    </div>
-			    
-			    <%
-			   	if(portfolio.getUser().getUid().equals(uid) || isAdmin) {
-			   	%>
-			   	<div class="post-edit">
-			    	<a href=edit_portfolio.jsp?pf_id=<%= portfolio.getId() %>>수정</a>
-			    	<a href="../service/portfolio/delete_portfolio_process.jsp?pf_id=<%= portfolio.getId()%>">삭제</a>
-
-			    <%
-			    	if(isAdmin) {
-			    %>
-					<a href="../service/user/delete_user_process.jsp?id=<%= portfolio.getUser().getId()%>">회원 추방</a>
-			    <%
-			    	}
-			    %>
-			    </div>
-			   	<%
-			   	} else if(uid.length() > 2) {
-			   	%>
-			   	<div class="post-edit">
-			    	<a href="../service/shared/insert_shared_process.jsp?id=<%= loginUserId%>&pf_id=<%=id %>">즐겨찾기</a>
-			    </div>
-			   	<%	
-			   	}
-			    %>
-			    
 			</div>
 		    <hr class="post-divider">
 		    
@@ -109,7 +60,7 @@
 		    	<%
 		    		for(String spec : portfolio.getSpecArray()) {
 		    	%>
-		    			<span>&nbsp;&nbsp;&nbsp;&nbsp;<%= spec %></span><br>
+		    			<span>&nbsp;&nbsp;&nbsp;&nbsp;- <%= spec %></span><br>
 		    	<%
 		    		}
 		    	%>
@@ -146,5 +97,7 @@
 			</div>
 		</div>
 	</main>
+	
+	<script src="../resources/javascript/portfolio_pdf.js"></script>
 </body>
 </html>
