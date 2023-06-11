@@ -4,7 +4,7 @@ portfolio platform service
 ## 포트폴리오 제작 웹서비스
 
 ### 구조
-
+```
 C:.
 ├─.settings
 ├─build
@@ -35,7 +35,7 @@ C:.
             ├─view
             └─WEB-INF
                 └─lib
-
+```
 ### 사용 기술
  - jsp(css, javascript)
  - java 11
